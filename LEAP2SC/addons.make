@@ -1,0 +1,6 @@
+ofxXmlSettings
+ofxOsc
+ofxLeapMotion
+ofxSuperCollider
+ofxSuperColliderBoot
+
