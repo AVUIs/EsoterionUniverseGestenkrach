@@ -14,6 +14,7 @@ static ofxOscSender *sender = NULL;        //KX each obj same sender
 ecuaObject::ecuaObject(ofVec3f _p) {
     setup(_p);
     if (sender==NULL) {
+        cout << "NEW SENDER" << endl;
         sender = new ofxOscSender();
         sender->setup(HOST, PORT);
     }
