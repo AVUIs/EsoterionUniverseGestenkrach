@@ -82,7 +82,7 @@ void ecuaObject::update() {
     }
     
     krach.setPan(screenCoords.x);
-    krach.setAmp(ofMap(distToCam, 0, 2000, 2.0, 0.1));
+    krach.setAmp(ofMap(distToCam, 0, 2000, 2.0, 0.1, true));
     
 }
 

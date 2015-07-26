@@ -73,7 +73,7 @@ void krachObject::setPan(float _val) {
 }
 
 void krachObject::setAmp(float _val) {
-//    krach->set("amp", _val);
+    krach->set("amp", _val);
 }
 
 
