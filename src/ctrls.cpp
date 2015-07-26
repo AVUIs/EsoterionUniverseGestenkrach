@@ -6,8 +6,11 @@ ctrls::ctrls() {
 
 //--------------------------------------------------------------
 void ctrls::setup(){
-    //setupP();
-    setupM();
+    UIType = 0; //touch
+    UIType = 1; //Leapmotion
+    
+    if (UIType==1) setupM();
+        else setupP();
 }
 
 void ctrls::setupP() {
@@ -106,7 +109,8 @@ void ctrls::setActive(bool activ){
 
 //--------------------------------------------------------------
 void ctrls::draw(){
-    drawM();
+    if (UIType==1) drawM();
+        else drawP();
 }
 
 void ctrls::drawP(){
@@ -244,11 +248,11 @@ void ctrls::mouseDragged(int x, int y, int button){
     for(int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0);i++){
         if(touchedFader == i){
             
-            float zeroDist = ofDist(mouseX,mouseY,0,0);
+            float zeroDist = ofDist(x,y,ofGetWidth()/2,ofGetHeight()/2);
             if(dragged && zeroDist > innerCircle){
   //              cout<<ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle<<endl;
                 
-                float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])   , 0, len[i], -0.05, 1);
+                float val = ofMap(   ofDist(x,y,xMin[i],yMin[i]), 0, len[i], -0.05, 1);
                 
                 val = ofClamp(val,0,1);
 //                cout<<len[i]<<"  "<<val<<endl;
@@ -264,27 +268,49 @@ void ctrls::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ctrls::mousePressed(int x, int y, int button){
-    dragged = true;
-    downX=mouseX;//x-screenPos.x;
-    downY=mouseY;//y-screenPos.y;
-    
-    for(int i = 0; i<amnt; i++){
-        float mouseDist = ofDist(mouseX, mouseY, xPos[i+(useSecondary?amnt:0)], yPos[i+(useSecondary?amnt:0)]);
-
-        if( mouseDist < ballSize*2){
-            
-            float zeroDist = ofDist(mouseX,mouseY,0,0);
-            
-            if(dragged && zeroDist > innerCircle){
-                touchedFader = i+(useSecondary?amnt:0);
-                //cout << "TOUCHED FADER: " << touchedFader << endl;
+    if (UIType==1) {
+        dragged = true;
+        for(int i = 0; i<amnt; i++){
+            float mouseDist = ofDist(x, y, xPos[i+(useSecondary?amnt:0)], yPos[i+(useSecondary?amnt:0)]);
+//
+            if( mouseDist < ballSize*2){
+                float zeroDist = ofDist(x,y,ofGetWidth()/2,ofGetHeight()/2);
+                cout << "zeroDist " << zeroDist << endl;
+                if(dragged && zeroDist > innerCircle){
+                    touchedFader = i+(useSecondary?amnt:0);
+                    //cout << "TOUCHED FADER: " << touchedFader << endl;
+                }
             }
+
         }
 
-    }
-    
-    if(ofDist(downX,downY,0,0) < innerCircle){
-        active = 0;
+        if(ofDist(x,y,ofGetWidth()/2,ofGetHeight()/2) < innerCircle){
+            active = 0;
+        }
+        
+    } else {
+        dragged = true;
+        downX=mouseX;//x-screenPos.x;
+        downY=mouseY;//y-screenPos.y;
+        
+        for(int i = 0; i<amnt; i++){
+            float mouseDist = ofDist(mouseX, mouseY, xPos[i+(useSecondary?amnt:0)], yPos[i+(useSecondary?amnt:0)]);
+
+            if( mouseDist < ballSize*2){
+                
+                float zeroDist = ofDist(mouseX,mouseY,0,0);
+                
+                if(dragged && zeroDist > innerCircle){
+                    touchedFader = i+(useSecondary?amnt:0);
+                    //cout << "TOUCHED FADER: " << touchedFader << endl;
+                }
+            }
+
+        }
+        
+        if(ofDist(downX,downY,0,0) < innerCircle){
+            active = 0;
+        }
     }
 }
 

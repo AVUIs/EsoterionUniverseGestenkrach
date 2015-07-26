@@ -35,7 +35,7 @@ public:
     float size = 100;
     float scale = 1.;
     float spacer = 1.;
-    float ballSize = 15;
+    float ballSize = 30;
     float faderPos= 0.5;
     float innerCircle = 20;
     int touchedFader = -1;
@@ -60,5 +60,8 @@ public:
     
     bool useSecondary = false;
     bool useTertiary = false;
+    
+    int UIType;
+    
 };
 

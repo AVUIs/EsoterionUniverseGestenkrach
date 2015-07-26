@@ -43,7 +43,7 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
 //    objOscillation = ofRandom(1.0);
 //    objAmplitude = ofRandom(1.0);
 
-    for (int i=0; i<5; i++) setParam(i, ofRandom(1.0));
+    for (int i=0; i<5; i++) setParam(i, ofRandom(.8)+.2);
     
     //krach.setParam(0, 1);
 

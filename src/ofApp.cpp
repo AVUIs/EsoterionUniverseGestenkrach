@@ -134,6 +134,8 @@ void ofApp::update(){
         }
     }
     
+  //  if (simpleHands.size()==0) currentEditingObj=NULL;
+    
     if (currentEditingObj!=NULL) {
         for (int i = 0; i < control.amnt; i++) {
             currentEditingObj->setParam(i, control.fadersPos[i]);
@@ -168,14 +170,14 @@ void ofApp::draw(){
     
     if (universe->objects.size()==0 || showHelp) {
         ofSetColor(255);
-        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nClick on object = Show GUI\nCmd-Click = Secondary GUI\nAlt-Click = Tertiary GUI\nH = Show this help", ofGetWidth()/2 - 100, 30);
+        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nClick on object = Show GUI\nCmd-Click = Secondary GUI\nAlt-Click = Tertiary GUI\n0 = Armageddon\nH = Show this help", ofGetWidth()/2 - 100, 30);
     }
     
     ofSetColor(255,0,0);
     ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED", 10, 10);
     
     ofPushStyle();
-    ofSetLineWidth(10);
+    ofSetLineWidth(5);
     ofSetColor(255, 255, 255,50);
     for (int i=0; i<simpleHands.size(); i++) {
         ofSetLineWidth(10);
@@ -240,6 +242,8 @@ void ofApp::keyPressed(int key){
     KEY('h', showHelp =!showHelp);
 
     KEY('d', universe->debug = !universe->debug);
+
+    KEY('0', universe->clearUniverse());
     
     KEY(OF_KEY_COMMAND, control.useSecondary=true);
     KEY(OF_KEY_ALT, control.useTertiary=true);

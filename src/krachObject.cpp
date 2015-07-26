@@ -28,7 +28,7 @@ void krachObject::update() {
 void krachObject::setParam(int _param, float _val) {
     switch (_param) {
         case 0:
-        krach->set("val4", _val);
+        krach->set("val4", ofMap(_val, 0.0, 1.0, 0, 100, true));
         break;
         case 1:
         {
@@ -53,14 +53,14 @@ void krachObject::setParam(int _param, float _val) {
         }
         case 2:
         //AMP/VOL HERE
-        krach->set("val1", _val);
+        krach->set("val1", ofMap(_val, 0.0, 1.0, 0, 100, true));
         break;
         case 3:
         //if not normalized in krad do something like ofMap(_val, 0.0, 1.0, 0, 255, true);
-        krach->set("val2", _val);
+        krach->set("val2", ofMap(_val, 0.0, 1.0, 0, 100, true));
         break;
         case 4:
-        krach->set("val3", _val);
+        krach->set("val3", ofMap(_val, 0.0, 1.0, 0, 100, true));
         break;
         default:
         break;
@@ -69,6 +69,7 @@ void krachObject::setParam(int _param, float _val) {
 
 void krachObject::setPan(float _val) {
     krach->set("pan", _val);
+  //  cout << "PAN: " << _val << endl;
 }
 
 void krachObject::setAmp(float _val) {
