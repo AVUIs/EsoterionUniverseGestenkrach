@@ -7,12 +7,16 @@ public:
     ctrls();
 
     void setup();
+    void setupP();
+    void setupM();
     void update(ofVec3f screenPosition);
     void draw();
     void drawP();
+    void drawM();
     bool getActive();
     void setActive(bool activ);
-    bool deleteObject(int x, int y, int button);
+    bool deleteObject(int x, int y, int button = 0);
+    void deleteObjectNow();
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -23,13 +27,15 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+    void setFaderVal(int _fader, float _val);
+    void checkTouchedFaderX(int _x);
+    void setTouchedFaderVal(float _val);
 
-    
     int amnt = 5;
     float size = 100;
     float scale = 1.;
     float spacer = 1.;
-    float ballSize = 10;
+    float ballSize = 15;
     float faderPos= 0.5;
     float innerCircle = 20;
     int touchedFader = -1;

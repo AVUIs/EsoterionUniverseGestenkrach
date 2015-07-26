@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3EB4792D1B63B8610033B038 /* krachObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4792B1B63B8610033B038 /* krachObject.cpp */; };
+		3EB47BB01B63D9260033B038 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB47B981B63D9260033B038 /* libLeap.dylib */; };
+		3EB47BB41B63D9260033B038 /* ofxLeapMotion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BA71B63D9260033B038 /* ofxLeapMotion.cpp */; };
+		3EB47BD81B6412C30033B038 /* ofxSCBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BC71B6412C30033B038 /* ofxSCBuffer.cpp */; };
+		3EB47BD91B6412C30033B038 /* ofxSCBus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BC91B6412C30033B038 /* ofxSCBus.cpp */; };
+		3EB47BDA1B6412C30033B038 /* ofxSCGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BCB1B6412C30033B038 /* ofxSCGroup.cpp */; };
+		3EB47BDB1B6412C30033B038 /* ofxSCNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BCD1B6412C30033B038 /* ofxSCNode.cpp */; };
+		3EB47BDC1B6412C30033B038 /* ofxSCResourceAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BCF1B6412C30033B038 /* ofxSCResourceAllocator.cpp */; };
+		3EB47BDD1B6412C30033B038 /* ofxSCServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BD11B6412C30033B038 /* ofxSCServer.cpp */; };
+		3EB47BDE1B6412C30033B038 /* ofxSCSynth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB47BD31B6412C30033B038 /* ofxSCSynth.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -82,6 +91,26 @@
 /* Begin PBXFileReference section */
 		3EB4792B1B63B8610033B038 /* krachObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = krachObject.cpp; sourceTree = "<group>"; };
 		3EB4792C1B63B8610033B038 /* krachObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = krachObject.h; sourceTree = "<group>"; };
+		3EB47B901B63D9260033B038 /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
+		3EB47B911B63D9260033B038 /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
+		3EB47B981B63D9260033B038 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		3EB47BA71B63D9260033B038 /* ofxLeapMotion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxLeapMotion.cpp; sourceTree = "<group>"; };
+		3EB47BA81B63D9260033B038 /* ofxLeapMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLeapMotion.h; sourceTree = "<group>"; };
+		3EB47BC71B6412C30033B038 /* ofxSCBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCBuffer.cpp; sourceTree = "<group>"; };
+		3EB47BC81B6412C30033B038 /* ofxSCBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCBuffer.h; sourceTree = "<group>"; };
+		3EB47BC91B6412C30033B038 /* ofxSCBus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCBus.cpp; sourceTree = "<group>"; };
+		3EB47BCA1B6412C30033B038 /* ofxSCBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCBus.h; sourceTree = "<group>"; };
+		3EB47BCB1B6412C30033B038 /* ofxSCGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCGroup.cpp; sourceTree = "<group>"; };
+		3EB47BCC1B6412C30033B038 /* ofxSCGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCGroup.h; sourceTree = "<group>"; };
+		3EB47BCD1B6412C30033B038 /* ofxSCNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCNode.cpp; sourceTree = "<group>"; };
+		3EB47BCE1B6412C30033B038 /* ofxSCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCNode.h; sourceTree = "<group>"; };
+		3EB47BCF1B6412C30033B038 /* ofxSCResourceAllocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCResourceAllocator.cpp; sourceTree = "<group>"; };
+		3EB47BD01B6412C30033B038 /* ofxSCResourceAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCResourceAllocator.h; sourceTree = "<group>"; };
+		3EB47BD11B6412C30033B038 /* ofxSCServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCServer.cpp; sourceTree = "<group>"; };
+		3EB47BD21B6412C30033B038 /* ofxSCServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCServer.h; sourceTree = "<group>"; };
+		3EB47BD31B6412C30033B038 /* ofxSCSynth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSCSynth.cpp; sourceTree = "<group>"; };
+		3EB47BD41B6412C30033B038 /* ofxSCSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSCSynth.h; sourceTree = "<group>"; };
+		3EB47BD51B6412C30033B038 /* ofxSuperCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSuperCollider.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -109,7 +138,6 @@
 		EE0999221A6DD0E700A4C11C /* main.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = main.vert; path = bin/data/main.vert; sourceTree = "<group>"; };
 		EE264D031A348DBC00ADE8AC /* ecuaObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ecuaObject.cpp; sourceTree = "<group>"; };
 		EE264D041A348DBC00ADE8AC /* ecuaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecuaObject.h; sourceTree = "<group>"; };
-		EE264D071A34A31E00ADE8AC /* addon_config.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = addon_config.mk; sourceTree = "<group>"; };
 		EE264D0C1A34A31E00ADE8AC /* IpEndpointName.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		EE264D0D1A34A31E00ADE8AC /* IpEndpointName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		EE264D0E1A34A31E00ADE8AC /* NetworkingUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -170,6 +198,7 @@
 				E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
 				E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */,
+				3EB47BB01B63D9260033B038 /* libLeap.dylib in Frameworks */,
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
@@ -186,9 +215,95 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EB47B611B63D9260033B038 /* ofxLeapMotion */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47B8E1B63D9260033B038 /* libs */,
+				3EB47BA61B63D9260033B038 /* src */,
+			);
+			name = ofxLeapMotion;
+			path = ../../../addons/ofxLeapMotion;
+			sourceTree = "<group>";
+		};
+		3EB47B8E1B63D9260033B038 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47B8F1B63D9260033B038 /* include */,
+				3EB47B921B63D9260033B038 /* lib */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		3EB47B8F1B63D9260033B038 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47B901B63D9260033B038 /* Leap.h */,
+				3EB47B911B63D9260033B038 /* LeapMath.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		3EB47B921B63D9260033B038 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47B971B63D9260033B038 /* osx */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		3EB47B971B63D9260033B038 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47B981B63D9260033B038 /* libLeap.dylib */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		3EB47BA61B63D9260033B038 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47BA71B63D9260033B038 /* ofxLeapMotion.cpp */,
+				3EB47BA81B63D9260033B038 /* ofxLeapMotion.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		3EB47BBB1B6412C30033B038 /* ofxSuperCollider */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47BC61B6412C30033B038 /* src */,
+			);
+			name = ofxSuperCollider;
+			path = ../../../addons/ofxSuperCollider;
+			sourceTree = "<group>";
+		};
+		3EB47BC61B6412C30033B038 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3EB47BC71B6412C30033B038 /* ofxSCBuffer.cpp */,
+				3EB47BC81B6412C30033B038 /* ofxSCBuffer.h */,
+				3EB47BC91B6412C30033B038 /* ofxSCBus.cpp */,
+				3EB47BCA1B6412C30033B038 /* ofxSCBus.h */,
+				3EB47BCB1B6412C30033B038 /* ofxSCGroup.cpp */,
+				3EB47BCC1B6412C30033B038 /* ofxSCGroup.h */,
+				3EB47BCD1B6412C30033B038 /* ofxSCNode.cpp */,
+				3EB47BCE1B6412C30033B038 /* ofxSCNode.h */,
+				3EB47BCF1B6412C30033B038 /* ofxSCResourceAllocator.cpp */,
+				3EB47BD01B6412C30033B038 /* ofxSCResourceAllocator.h */,
+				3EB47BD11B6412C30033B038 /* ofxSCServer.cpp */,
+				3EB47BD21B6412C30033B038 /* ofxSCServer.h */,
+				3EB47BD31B6412C30033B038 /* ofxSCSynth.cpp */,
+				3EB47BD41B6412C30033B038 /* ofxSCSynth.h */,
+				3EB47BD51B6412C30033B038 /* ofxSuperCollider.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				3EB47BBB1B6412C30033B038 /* ofxSuperCollider */,
+				3EB47B611B63D9260033B038 /* ofxLeapMotion */,
 				EE29E8C61A6D7D4000A3FAD5 /* ofxXmlSettings */,
 				EE264D061A34A31E00ADE8AC /* ofxOsc */,
 			);
@@ -289,7 +404,6 @@
 		EE264D061A34A31E00ADE8AC /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
-				EE264D071A34A31E00ADE8AC /* addon_config.mk */,
 				EE264D081A34A31E00ADE8AC /* libs */,
 				EE264D251A34A31E00ADE8AC /* src */,
 			);
@@ -501,7 +615,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\n";
+			shellScript = "cp -f ../../../libs/fmodex/lib/osx/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libfmodex.dylib\"; install_name_tool -change ./libfmodex.dylib @executable_path/libfmodex.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";\nmkdir -p \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f \"$ICON_FILE\" \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/Resources/\"\ncp -f ../../../addons/ofxLeapMotion/libs/lib/osx/libLeap.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/libLeap.dylib\"; install_name_tool -change ./libLeap.dylib @executable_path/libLeap.dylib \"$TARGET_BUILD_DIR/$PRODUCT_NAME.app/Contents/MacOS/$PRODUCT_NAME\";";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -511,23 +625,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE29E8CF1A6D7D6B00A3FAD5 /* tinyxml.cpp in Sources */,
+				3EB47BDA1B6412C30033B038 /* ofxSCGroup.cpp in Sources */,
 				EE29E8D01A6D7D6B00A3FAD5 /* tinyxmlerror.cpp in Sources */,
 				EE29E8D11A6D7D6B00A3FAD5 /* tinyxmlparser.cpp in Sources */,
 				EE29E8D21A6D7D6B00A3FAD5 /* ofxXmlSettings.cpp in Sources */,
+				3EB47BDE1B6412C30033B038 /* ofxSCSynth.cpp in Sources */,
 				EE264D461A34B37200ADE8AC /* ctrls.cpp in Sources */,
+				3EB47BDC1B6412C30033B038 /* ofxSCResourceAllocator.cpp in Sources */,
 				EE264D3D1A34ACB700ADE8AC /* ofxOscMessage.cpp in Sources */,
+				3EB47BB41B63D9260033B038 /* ofxLeapMotion.cpp in Sources */,
 				EE264D3E1A34ACB700ADE8AC /* ofxOscParameterSync.cpp in Sources */,
 				EE264D391A34ABBB00ADE8AC /* ofxOscBundle.cpp in Sources */,
 				EE264D3B1A34ABBB00ADE8AC /* ofxOscReceiver.cpp in Sources */,
 				EE264D3C1A34ABBB00ADE8AC /* ofxOscSender.cpp in Sources */,
 				EE264D321A34AB4300ADE8AC /* IpEndpointName.cpp in Sources */,
 				EE264D331A34AB4300ADE8AC /* NetworkingUtils.cpp in Sources */,
+				3EB47BD81B6412C30033B038 /* ofxSCBuffer.cpp in Sources */,
 				EE264D341A34AB4300ADE8AC /* UdpSocket.cpp in Sources */,
 				EE264D351A34AB4300ADE8AC /* OscOutboundPacketStream.cpp in Sources */,
 				EE264D361A34AB4300ADE8AC /* OscPrintReceivedElements.cpp in Sources */,
+				3EB47BDB1B6412C30033B038 /* ofxSCNode.cpp in Sources */,
 				3EB4792D1B63B8610033B038 /* krachObject.cpp in Sources */,
 				EE264D371A34AB4300ADE8AC /* OscReceivedElements.cpp in Sources */,
 				EE264D381A34AB4300ADE8AC /* OscTypes.cpp in Sources */,
+				3EB47BD91B6412C30033B038 /* ofxSCBus.cpp in Sources */,
+				3EB47BDD1B6412C30033B038 /* ofxSCServer.cpp in Sources */,
 				EEF7DEFF1A33695100B9DE2B /* ECURabbitObject.cpp in Sources */,
 				EEF7DEFB1A33668B00B9DE2B /* ECUUniverse.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
@@ -701,6 +823,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					"/Users/kumpri/WirelessCowboyProject/707.CODE/openFrameworks-master/addons/ofxLeapMotion/libs/lib/osx",
+					"/Users/kumpri/WirelessCowboyProject/707.CODE/openFrameworks-master/addons/ofxLeapMotion/libs/lib/winvs",
 				);
 				PRODUCT_NAME = EsoterionUniverseDebug;
 				WRAPPER_EXTENSION = app;
@@ -791,6 +915,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"/Users/kumpri/WirelessCowboyProject/707.CODE/openFrameworks-master/addons/ofxLeapMotion/libs/lib/osx",
+					"/Users/kumpri/WirelessCowboyProject/707.CODE/openFrameworks-master/addons/ofxLeapMotion/libs/lib/winvs",
 				);
 				PRODUCT_NAME = EsoterionUniverse;
 				WRAPPER_EXTENSION = app;

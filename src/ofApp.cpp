@@ -6,6 +6,7 @@
 #include "ecuaObject.h"
 
 ofVec3f p;
+bool zDown = false;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -38,6 +39,21 @@ void ofApp::setup(){
 //    ofRegisterMouseEvents(control);
 
     showHelp = false;
+    
+    //LEAP MOTION
+    leap.open();
+	leap.setupGestures();   // we enable our gesture detection here
+    leap.setMappingX(-200, 200, 0, ofGetWidth());
+    min[0] = -50;
+    min[1] = -50;
+    min[2] = -50;
+    min[3] = -50;
+    min[4] = -50;
+    max[0] = 0;
+    max[1] = 0;
+    max[2] = 0;
+    max[3] = 0;
+    max[4] = 0;
 }
 
 void ofApp::exit() {
@@ -56,6 +72,67 @@ void ofApp::update(){
 //            cout<<control.fadersPos[i]<<endl;
         }
     }
+    
+    //Leapmotion ctrl
+    simpleHands = leap.getSimpleHands();
+    
+    
+    for(int i = 0; i < simpleHands.size(); i++){
+//        cout << simpleHands[i].handPos.x << " " << simpleHands[i].handPos.y << " " << simpleHands[i].handPos.z << endl;
+
+        //HAND 1 = navigate / grab object
+        if (currentEditingObj == NULL) {
+            universe->pos.x-= simpleHands[0].handNormal.x*10;
+            universe->pos.z+= -simpleHands[0].handNormal.z*10;
+            universe->pos.y+= (simpleHands[0].handPos.y-200)*0.1;
+            if (simpleHands[0].sphereRadius<50) checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
+        } else {
+            if (simpleHands[0].sphereRadius>100) checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
+        }
+        
+        //HAND 2 = edit params
+        if (simpleHands.size()>1 && currentEditingObj != NULL) {
+            //blablabla
+            if (simpleHands[0].handPos.y<150) {
+                control.useSecondary=true;
+                control.useTertiary=false;
+            } else if (simpleHands[0].handPos.y<250) {
+                control.useSecondary=false;
+                control.useTertiary=false;
+            } else if (simpleHands[0].handPos.y>=250) {
+                control.useSecondary=false;
+                control.useTertiary=true;
+            }
+            
+            control.checkTouchedFaderX(simpleHands[1].handPos.x);
+            cout << simpleHands[1].handPos.x << " x " << simpleHands[1].handPos.y << endl;
+            
+//            for(int j = 0; j < simpleHands[1].fingers.size(); j++){
+//                int intVal = simpleHands[i].fingers[j].pos.y - simpleHands[i].fingers[j].base.y;
+//                
+//                float val = ofMap(intVal, min[i], max[i], -0.05, 1);
+//                val = ofClamp(val,0,1);
+//                
+//                control.setFaderVal(j, val);
+//            }
+
+            control.setTouchedFaderVal(ofMap(simpleHands[1].handPos.y, 100,200,0.0,1.0,true));
+            if (simpleHands[1].sphereRadius<50) {
+//                if (control.deleteObject(ofGetWidth()/2, ofGetHeight()/2, 0)) {
+//                    universe->deleteObject(currentEditingObj);
+//                    currentEditingObj == NULL;
+//                }
+            }
+        }
+    }
+    
+    if (currentEditingObj!=NULL) {
+    for (int i = 0; i < control.amnt; i++) {
+            currentEditingObj->setParam(i, control.fadersPos[i]);
+            universe->saved = false;
+            //if we found an object, set the of the control to the object so there is no jump
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -63,7 +140,7 @@ void ofApp::draw(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     ofShowCursor();
-    ofBackgroundGradient(ofColor(50), ofColor(0));
+    ofBackgroundGradient(ofColor(100), ofColor(0));
     //ofBackground(0, 0, 0);
     
     ofSetColor(255);
@@ -78,7 +155,7 @@ void ofApp::draw(){
     ofDisableDepthTest();
     
     if(currentEditingObj != NULL) {
-        control.drawP();
+        control.draw();
     }
     
     if (universe->objects.size()==0 || showHelp) {
@@ -90,7 +167,6 @@ void ofApp::draw(){
     ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED", 10, 10);
 }
 
-bool zDown = false;
 
 
 void ofApp::createObject() {
@@ -154,7 +230,7 @@ void ofApp::mouseMoved(int x, int y){
 ofVec3f downPosition;
 ofQuaternion downOrientation;
 
-float mouseRange = 0;
+//float mouseRange = 0;
 
 void ofApp::mouseDragged(int x, int y, int button) {
     if (currentEditingObj!=NULL) {
@@ -183,27 +259,8 @@ void ofApp::mouseScrolled(float x, float y) {
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    mouseRange = mouseX;
-    downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
-   // cout << "cam pos = " << downPosition << endl;
-    downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
-    
-    if(currentEditingObj != NULL && control.deleteObject(x, y, button)) {
-        universe->deleteObject(currentEditingObj);
-        currentEditingObj == NULL;
-    } else {
-        control.mousePressed(x, y, button);
-        if(currentEditingObj == NULL) {
-            currentEditingObj = universe->findEditObject(x, y);
-            if (currentEditingObj != NULL) {
-                control.setActive(1);
-                //if we found an object, set the of the control to the object so there is no jump
-                for (int i = 0; i < control.amnt; i++) {
-                    control.fadersPos[i] = currentEditingObj->getParam(i);
-                }
-            }
-        }
-    }
+//    mouseRange = mouseX;
+    checkObjectSelected(x, y);
 }
 
 //--------------------------------------------------------------
@@ -223,4 +280,27 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
     
+}
+
+void ofApp::checkObjectSelected(int x, int y) {
+    downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
+   // cout << "cam pos = " << downPosition << endl;
+    downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
+    
+    if(currentEditingObj != NULL && control.deleteObject(x, y, 0)) {
+        universe->deleteObject(currentEditingObj);
+        currentEditingObj == NULL;
+    } else {
+        control.mousePressed(x, y, 0);
+        if(currentEditingObj == NULL) {
+            currentEditingObj = universe->findEditObject(x, y);
+            if (currentEditingObj != NULL) {
+                control.setActive(1);
+                //if we found an object, set the of the control to the object so there is no jump
+                for (int i = 0; i < control.amnt; i++) {
+                    control.fadersPos[i] = currentEditingObj->getParam(i);
+                }
+            }
+        }
+    }
 }

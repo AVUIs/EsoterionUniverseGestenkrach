@@ -6,7 +6,11 @@ ctrls::ctrls() {
 
 //--------------------------------------------------------------
 void ctrls::setup(){
-    
+    //setupP();
+    setupM();
+}
+
+void ctrls::setupP() {
     spacer = TWO_PI / amnt;
 
     for(int i= 0; i< amnt; i++){
@@ -36,13 +40,40 @@ void ctrls::setup(){
         
         len.push_back(ofDist(xMin[i],yMin[i],xMax[i],yMax[i]));
     }
+}
 
-//    ofAddListener(ofEvents().update, this, &ctrls::update);
-//    ofAddListener(ofEvents().mouseDragged , this, &ctrls::mouseDragged);
-//    ofAddListener(ofEvents().mousePressed, this, &ctrls::mousePressed);
-//    ofAddListener(ofEvents().mouseReleased, this, &ctrls::mouseReleased);
-//    ofAddListener(ofEvents().mouseScrolled, this, &ctrls::mouseScrolled);
+void ctrls::setupM() {
+    spacer = ofGetWidth()/2 / amnt;
+    cout << "spacer = " << spacer << endl;
+    for(int i=0; i< amnt; i++){
+        fadersPos.push_back(1);
+        isTouched.push_back(false);
 
+        xMax.push_back( spacer/5 + i*spacer*scale);//i*spacer; //
+        yMax.push_back( ofGetHeight()/2*scale);
+        xMin.push_back( spacer + i*spacer*scale); //xMax-20;//
+        yMin.push_back( ofGetHeight()*scale);
+        
+        xPos.push_back( xMax[i] * 1.f);
+        yPos.push_back( yMax[i] * 1.f);
+        
+        len.push_back(ofDist(xMin[i],yMin[i],xMax[i],yMax[i]));
+    }
+    //double the amount to use with secondary layer
+    for(int i= 0; i< amnt; i++){
+        fadersPos.push_back(1);
+        isTouched.push_back(false);
+
+        xMax.push_back( spacer/5 + i*spacer*scale);//i*spacer; //
+        yMax.push_back( ofGetHeight()/2*scale);
+        xMin.push_back( spacer + i*spacer*scale); //xMax-20;//
+        yMin.push_back( ofGetHeight()*scale);
+        
+        xPos.push_back( xMax[i] * 1.f);
+        yPos.push_back( yMax[i] * 1.f);
+        
+        len.push_back(ofDist(xMin[i],yMin[i],xMax[i],yMax[i]));
+    }
 }
 
 //--------------------------------------------------------------
@@ -76,40 +107,7 @@ void ctrls::setActive(bool activ){
 
 //--------------------------------------------------------------
 void ctrls::draw(){
-/*do we need this at all?
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    for (int i = 0; i < amnt; i ++){
-        ofSetColor(255,0,0);
-
-        float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
-        if(mouseDist < ballSize*2){
-            ofFill();
-            ofDrawEllipse(xPos[i],yPos[i],ballSize,ballSize);
-        }
-
-        if(touchedFader == i){
-            ofSetColor(0,0,255,100);
-            ofDrawEllipse(xPos[i], yPos[i],ballSize*2, ballSize*2);
-            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
-        }
-        
-        else{
-            ofSetColor(255,0,0,30);
-            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
-        }
-        ofNoFill();
-        ofSetColor(255,100,100);
-        
-        ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
-        ofSetColor(255,220,0,200);
-        ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
-
-        ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt],yPos[(i+1)%amnt]);
-    }
-    
-    ofPopMatrix();
-*/
+    drawM();
 }
 
 void ctrls::drawP(){
@@ -124,8 +122,6 @@ void ctrls::drawP(){
         ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
         ofDrawLine(-innerCircle/2, -innerCircle/2, innerCircle/2, innerCircle/2);
         ofDrawLine(innerCircle/2, -innerCircle/2, -innerCircle/2, innerCircle/2);
-        
-        
     } else {
         ofSetLineWidth(2);
         ofNoFill();
@@ -155,6 +151,7 @@ void ctrls::drawP(){
                 ofSetColor(0,0,0,100);
                 if (useSecondary) ofSetColor(255,255,255,100);
                 ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+            ofDrawBitmapString(ofToString(i), xMax[i], yMax[i]);
             }
             ofNoFill();
             //ofSetColor(255,100,100);
@@ -164,6 +161,59 @@ void ctrls::drawP(){
         }
     }
     ofPopMatrix();
+}
+
+void ctrls::drawM(){
+    ofSetColor(0,0,0);
+    if (useTertiary) {
+        ofNoFill();
+        ofSetLineWidth(30);
+        ofSetColor(255, 100, 100);
+        ofDrawLine(ofGetWidth()/2-50, ofGetHeight()/2-50, ofGetWidth()/2+50, ofGetHeight()/2+50);
+        ofDrawLine(ofGetWidth()/2+50, ofGetHeight()/2-50, ofGetWidth()/2-50, ofGetHeight()/2+50);
+    } else {
+        ofSetLineWidth(10);
+        ofNoFill();
+        ofSetColor(0,0,255,100);
+        if (useSecondary) ofSetColor(0,255,0,100);
+        for (int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0); i ++){
+            //ofSetColor(255,0,0);
+            
+//            float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
+//            if(mouseDist < ballSize*2){
+//                ofFill();
+//                ofDrawEllipse(xPos[i],yPos[i],ballSize,ballSize);
+//            }
+            ofFill();
+            ofSetColor(255,255,255,255);
+            ofDrawLine(xMin[i],yPos[i],xMax[i], yPos[i]);
+            
+            if(touchedFader == i){
+                ofFill();
+                ofSetColor(255,255,255,200);
+//                if (useSecondary) ofSetColor(255,255,255,200);
+                ofDrawRectangle(xMin[i],yMin[i],xMax[i]-xMin[i], yMax[i]-yMin[i]);
+                ofSetColor(255,255,255,255);
+                ofDrawBitmapString(ofToString(i), xMax[i], yMax[i]);
+            }
+            
+            else{
+                ofFill();
+                ofSetColor(200,200,255,100);
+                if (useSecondary) ofSetColor(200,255,200,100);
+                //ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+                ofDrawRectangle(xMin[i],yMin[i],xMax[i]-xMin[i], yMax[i]-yMin[i]);
+                ofSetColor(255,255,255,255);
+                ofDrawBitmapString(ofToString(i), xMax[i], yMax[i]);
+            }
+            ofNoFill();
+//            ofSetColor(0,0,255,100);
+//            if (useSecondary) ofSetColor(0,255,0,100);
+            
+//            ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
+//            ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt+(useSecondary?amnt:0)],yPos[(i+1)%amnt+(useSecondary?amnt:0)]);
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -247,6 +297,26 @@ bool ctrls::deleteObject(int x, int y, int button) {
         return true;
     }
     return false;
+}
+
+void ctrls::deleteObjectNow() {
+    active = 0;
+}
+
+void ctrls::setFaderVal(int _fader, float _val) {
+    if (_fader<amnt) {
+        fadersPos[_fader+(useSecondary?amnt:0)] = _val;
+    }
+}
+
+void ctrls::checkTouchedFaderX(int _x) {
+    for (int i = 0; i<amnt; i++) {
+        if (i*spacer - _x < spacer) touchedFader = i;
+    }
+}
+
+void ctrls::setTouchedFaderVal(float _val) {
+    if (touchedFader > -1) fadersPos[touchedFader+(useSecondary?amnt:0)] = _val;
 }
 
 //--------------------------------------------------------------

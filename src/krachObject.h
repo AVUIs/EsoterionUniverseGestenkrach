@@ -9,7 +9,7 @@
 #ifndef __esoterionUniverse__krachObject__
 #define __esoterionUniverse__krachObject__
 
-#include <stdio.h>
+#include "ofxSuperCollider.h"
 
 class krachObject {
     
@@ -22,7 +22,8 @@ public:
     
     void setParam(int _param, float _val);
     float getParam(int _param);
-
+    
+    ofxSCSynth  *krach;
 };
 
 

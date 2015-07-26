@@ -18,23 +18,33 @@ ecuaObject::ecuaObject(ofVec3f _p) {
         sender = new ofxOscSender();
         sender->setup(HOST, PORT);
     }
+    //krach = new krachObject();
 }
 
 ecuaObject::~ecuaObject() {
     if (sender!=NULL) {
         delete sender;
         sender = NULL;
+//        delete krach;
+//        krach = NULL;
     }
 }
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
 
-    objWarmth = ofRandom(255.0);
-    objColor.setHsb(objWarmth, 255, 255);
-    objSize = ofRandom(100.0, 300.0);
-    objSharpness = ofRandom(128.0, 255.0);
-    objOscillation = ofRandom(1.0);
-    objAmplitude = ofRandom(1.0);
+    krach.setup();
+    
+//    objWarmth = ofRandom(255.0);
+//    objColor.setHsb(objWarmth, 255, 255);
+//    objSize = ofRandom(100.0, 300.0);
+//    objSharpness = ofRandom(128.0, 255.0);
+//    objOscillation = ofRandom(1.0);
+//    objAmplitude = ofRandom(1.0);
+
+    for (int i=0; i<5; i++) setParam(i, ofRandom(1.0));
+    
+    //krach.setParam(0, 1);
+
     pos = _p;
     id = _id;
     ball = new ofSpherePrimitive();
@@ -135,39 +145,39 @@ void ecuaObject::setOscillation(float _oscillation) {
 void ecuaObject::setParam(int _param, float _val) {
     switch (_param) {
         case 0:
-        objWarmth = ofMap(_val, 0.0, 1.0, 0, 255, true);
+        objAmplitude = ofMap(_val, 0.0, 1.0, 0.0, 1.0, true);
         break;
         case 1:
-        objSize = ofMap(_val, 0.0, 1.0, 10, 300, true);
+        objWarmth = ofMap(_val, 0.0, 1.0, 0, 255, true);
         break;
         case 2:
-        objSharpness = ofMap(_val, 0.0, 1.0, 0.0, 255.0, true);
+        objSize = ofMap(_val, 0.0, 1.0, 10, 300, true);
         break;
         case 3:
-        objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 1.0, true);
+        objSharpness = ofMap(_val, 0.0, 1.0, 0.0, 255.0, true);
         break;
         case 4:
-        objAmplitude = ofMap(_val, 0.0, 1.0, 0.0, 1.0, true);
+        objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 1.0, true);
         break;
         default:
         break;
     }
-
+    krach.setParam(_param, _val);
 }
 
 
 float ecuaObject::getParam(int _param) {
     switch (_param) {
         case 0:
-        return ofMap(objWarmth, 0, 255, 0.0, 1.0, true);
-        case 1:
-        return ofMap(objSize, 10, 300, 0.0, 1.0, true);
-        case 2:
-        return ofMap(objSharpness, 0.0, 255.0, 0.0, 1.0, true);
-        case 3:
-        return ofMap(objOscillation, 0.0, 1.0, 0.0, 1.0, true);
-        case 4:
         return ofMap(objAmplitude, 0.0, 1.0, 0.0, 1.0, true);
+        case 1:
+        return ofMap(objWarmth, 0, 255, 0.0, 1.0, true);
+        case 2:
+        return ofMap(objSize, 10, 300, 0.0, 1.0, true);
+        case 3:
+        return ofMap(objSharpness, 0.0, 255.0, 0.0, 1.0, true);
+        case 4:
+        return ofMap(objOscillation, 0.0, 1.0, 0.0, 1.0, true);
         default:
         return 0;
     }

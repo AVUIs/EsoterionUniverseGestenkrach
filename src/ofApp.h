@@ -4,6 +4,7 @@
 
 #include "ECUUniverse.h"
 #include "ctrls.h"
+#include "ofxLeapMotion.h"
 
 enum {
     CREATING, CREATED
@@ -16,17 +17,18 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-    void exit();
+        void exit();
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y);
 		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
-    void mouseScrolled(float x, float y);
+        void mouseScrolled(float x, float y);
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void checkObjectSelected(int x, int y);
     
     ofLight pointLight2;
 
@@ -44,4 +46,9 @@ class ofApp : public ofBaseApp{
     int curObj;
     
     bool showHelp;
+    
+    ofxLeapMotion leap;
+	vector <ofxLeapMotionSimpleHand> simpleHands;
+    int min[5];
+    int max[5];
 };

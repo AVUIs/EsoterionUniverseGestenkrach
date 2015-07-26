@@ -11,7 +11,7 @@
 
 #include "ofMain.h"
 #include "ECUBaseObject.h"
-
+#include "krachObject.h"
 
 //#define HOST "192.168.0.2"
 #define HOST "localhost"
@@ -53,7 +53,9 @@ public:
     float   curSize;
     
     float lastSumNoise;
-    
+
+    //sound
+    krachObject krach;
 };
 
 
