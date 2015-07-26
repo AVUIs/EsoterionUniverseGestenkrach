@@ -31,7 +31,9 @@ ecuaObject::~ecuaObject() {
 }
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
-
+    
+    cout << "NEW ECUA OBJECT" << endl;
+    
     krach.setup();
     
 //    objWarmth = ofRandom(255.0);
@@ -78,6 +80,10 @@ void ecuaObject::update() {
         
         sender->sendMessage(m);
     }
+    
+    krach.setPan(screenCoords.x);
+    krach.setAmp(ofMap(distToCam, 0, 2000, 2.0, 0.1));
+    
 }
 
 void ecuaObject::draw() {

@@ -7,11 +7,13 @@
 
 ofVec3f p;
 bool zDown = false;
+ofPoint movingVector;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
     ofSetFrameRate(30);
+    ofSetCircleResolution(100);
 //    ofSetEscapeQuitsApp(false);
 //    mesh.load("lofi-bunny.ply");
     
@@ -39,11 +41,13 @@ void ofApp::setup(){
 //    ofRegisterMouseEvents(control);
 
     showHelp = false;
+    movingVector = ofPoint(0,0,0);
     
     //LEAP MOTION
     leap.open();
 	leap.setupGestures();   // we enable our gesture detection here
     leap.setMappingX(-200, 200, 0, ofGetWidth());
+    leap.setMappingY(50, 300, 0, ofGetHeight());
     min[0] = -50;
     min[1] = -50;
     min[2] = -50;
@@ -80,32 +84,36 @@ void ofApp::update(){
     for(int i = 0; i < simpleHands.size(); i++){
 //        cout << simpleHands[i].handPos.x << " " << simpleHands[i].handPos.y << " " << simpleHands[i].handPos.z << endl;
 
+        
         //HAND 1 = navigate / grab object
-        if (currentEditingObj == NULL) {
-            universe->pos.x-= simpleHands[0].handNormal.x*10;
-            universe->pos.z+= -simpleHands[0].handNormal.z*10;
-            universe->pos.y+= (simpleHands[0].handPos.y-200)*0.1;
-            if (simpleHands[0].sphereRadius<50) checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
-        } else {
-            if (simpleHands[0].sphereRadius>100) checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
+        if (currentEditingObj == NULL && simpleHands[0].isRight) {
+            universe->pos.x+= simpleHands[0].handNormal.x*5;
+            universe->pos.z+= -simpleHands[0].handNormal.z*20;
+            universe->pos.y+= (simpleHands[0].handPos.y-ofGetHeight()/2)*0.01;
+            movingVector = ofPoint(simpleHands[0].handNormal.x*10, (simpleHands[0].handPos.y-ofGetHeight()/2)*0.1);
+            if (simpleHands[0].pinchStrength>0.8) {
+                checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
+                if (currentEditingObj == NULL) keyPressed('a');
+            }
+        } else if (simpleHands[0].isRight) {
+            if (simpleHands[0].pinchStrength<0.1) checkObjectSelected(ofGetWidth()/2, ofGetHeight()/2);
         }
         
         //HAND 2 = edit params
-        if (simpleHands.size()>1 && currentEditingObj != NULL) {
+        if (simpleHands.size()>1 && simpleHands[0].isRight && currentEditingObj != NULL) {
             //blablabla
-            if (simpleHands[0].handPos.y<150) {
+            if (simpleHands[0].handPos.y>ofGetHeight()/3*2) {
                 control.useSecondary=true;
                 control.useTertiary=false;
-            } else if (simpleHands[0].handPos.y<250) {
+            } else if (simpleHands[0].handPos.y>ofGetHeight()/3) {
                 control.useSecondary=false;
                 control.useTertiary=false;
-            } else if (simpleHands[0].handPos.y>=250) {
+            } else {
                 control.useSecondary=false;
                 control.useTertiary=true;
             }
             
             control.checkTouchedFaderX(simpleHands[1].handPos.x);
-            cout << simpleHands[1].handPos.x << " x " << simpleHands[1].handPos.y << endl;
             
 //            for(int j = 0; j < simpleHands[1].fingers.size(); j++){
 //                int intVal = simpleHands[i].fingers[j].pos.y - simpleHands[i].fingers[j].base.y;
@@ -116,7 +124,7 @@ void ofApp::update(){
 //                control.setFaderVal(j, val);
 //            }
 
-            control.setTouchedFaderVal(ofMap(simpleHands[1].handPos.y, 100,200,0.0,1.0,true));
+            control.setTouchedFaderVal(ofMap(simpleHands[1].handPos.y, ofGetHeight()/3,ofGetHeight()/3*2,0.0,1.0,true));
             if (simpleHands[1].sphereRadius<50) {
 //                if (control.deleteObject(ofGetWidth()/2, ofGetHeight()/2, 0)) {
 //                    universe->deleteObject(currentEditingObj);
@@ -127,7 +135,7 @@ void ofApp::update(){
     }
     
     if (currentEditingObj!=NULL) {
-    for (int i = 0; i < control.amnt; i++) {
+        for (int i = 0; i < control.amnt; i++) {
             currentEditingObj->setParam(i, control.fadersPos[i]);
             universe->saved = false;
             //if we found an object, set the of the control to the object so there is no jump
@@ -165,6 +173,31 @@ void ofApp::draw(){
     
     ofSetColor(255,0,0);
     ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED", 10, 10);
+    
+    ofPushStyle();
+    ofSetLineWidth(10);
+    ofSetColor(255, 255, 255,50);
+    for (int i=0; i<simpleHands.size(); i++) {
+        ofSetLineWidth(10);
+        ofDrawLine(simpleHands[i].handPos.x, 0, simpleHands[i].handPos.x, ofGetHeight());
+        ofDrawLine(0, (ofGetHeight()-simpleHands[i].handPos.y), ofGetWidth(), (ofGetHeight()-simpleHands[i].handPos.y));
+        ofDrawCircle(simpleHands[i].handPos.x, (ofGetHeight()-simpleHands[i].handPos.y), (1-simpleHands[i].pinchStrength)*50);
+        ofSetLineWidth(2);
+        if (i==0) ofDrawLine(simpleHands[i].handPos.x, (ofGetHeight()-simpleHands[i].handPos.y),
+                             simpleHands[i].handPos.x + movingVector.x*10, (ofGetHeight()-simpleHands[i].handPos.y) + movingVector.y*10);
+    }
+    ofNoFill();
+    ofDrawLine(0, ofGetHeight()/3, ofGetWidth(), ofGetHeight()/3);
+    ofDrawLine(0, ofGetHeight()/3*2, ofGetWidth(), ofGetHeight()/3*2);
+//    ofDrawLine(ofGetWidth()/2, 0, ofGetWidth()/2, ofGetHeight());
+    ofSetLineWidth(5);
+    if (universe->findEditObject(ofGetWidth()/2, ofGetHeight()/2)!=NULL) ofSetColor(255, 255, 255,200);
+    ofDrawLine(ofGetWidth()/2-75, ofGetHeight()/2-75, ofGetWidth()/2-25, ofGetHeight()/2-25);
+    ofDrawLine(ofGetWidth()/2+25, ofGetHeight()/2+25, ofGetWidth()/2+75, ofGetHeight()/2+75);
+    ofDrawLine(ofGetWidth()/2-75, ofGetHeight()/2+75, ofGetWidth()/2-25, ofGetHeight()/2+25);
+    ofDrawLine(ofGetWidth()/2+25, ofGetHeight()/2-25, ofGetWidth()/2+75, ofGetHeight()/2-75);
+//    ofCircle(ofGetWidth()/2, ofGetHeight()/2, 50);
+    ofPopStyle();
 }
 
 

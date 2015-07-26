@@ -1,43 +1,39 @@
-Esoterion Universe
-==================
+Esoterion Universe Krach Edition
+================================
 
-A deep and colourful generative 3D AV project.
+A noisy and colourful generative 3D AV project.
 
 Main features:
 - Infinite 3D space
 - Infinite number of planet-like dynamic objects
 - Single screen for interface and output
+- Wider variety of sounds, based on SuperCollider engine
+- Leapmotion suport
 
 What you need
 -------------
 
-- The most recent version of openFrameworks, download here: https://github.com/openframeworks/openFrameworks/archive/master.zip
-- Max 7, download trial here: https://cycling74.com/products/max/
-- FTM library for Max 7, download here: http://ftm.ircam.fr/index.php/Download
+- The most recent version of openFrameworks, download from https://github.com/openframeworks/openFrameworks/archive/master.zip
+- additional openFrameworks addons: ofxLeapMotion (https://github.com/ofTheo/ofxLeapMotion), ofxSuperCollider (https://code.google.com/p/ofxsupercollider/)
+- SuperCollider, download from http://www.audiosynth.com
 
 Installation
 ------------
 
 - Unzip openFrameworks to a convenient place in your system
-- Clone this repository to `apps/myApps/EsoterionUniverse/` inside openFrameworks folder
-- Download sound source from http://wirelesscowboy.org/esoterionuniverse/balayage444.wav and place in `EsoterionUniverse/bin/max/` folder
-- Install Max 7
-- Install FTM library: if needed add it manually to `Max 7/Packages` folder inside your user's `Documents` folder
+- copy additional addons to `addons` inside openFrameworks folder
+- Clone this repository to `apps/myApps/EsoterionUniverseKrachEdition/` inside openFrameworks folder
+- install SuperCollider, follow install instructions here http://www.audiosynth.com
 
 Running
 -------
 
-- Open `max/MainPatch.maxpat` in Max 7, when loaded click Audio On/Off (beware of a glitch first time)
 - Open and run XCode project `esoterionUniverse.xcodeproj`
-- Add an object with `a` key and try changing the parameters
-- If there`s no sound, first turn volume up, then click Audio On/Off twice in Max patch
-- Show instructions with `h` key
+- Show/Hide instructions with `h` key
 - Play around and have fun
 
-Known issue
------------
+* Sound instructions coming soon *
 
-Due to either a compabitility issue between poly~ and gbr.ola objects, or cpu consumption issues between video/osc/synthesis on the same computer, the granular synthesis is affected by glitches. A new version should see these problems solved hopefully.
 
 Disclaimer
 ----------
@@ -54,3 +50,5 @@ Credits
 [Will Gallia](http://willgallia.com)
 
 [Borut Kumperscak](http://wirelesscowboy.org)
+
+[Jens Meisner](http://digitalstages.com)

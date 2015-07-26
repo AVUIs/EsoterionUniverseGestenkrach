@@ -44,7 +44,6 @@ void ctrls::setupP() {
 
 void ctrls::setupM() {
     spacer = ofGetWidth()/2 / amnt;
-    cout << "spacer = " << spacer << endl;
     for(int i=0; i< amnt; i++){
         fadersPos.push_back(1);
         isTouched.push_back(false);
@@ -311,7 +310,7 @@ void ctrls::setFaderVal(int _fader, float _val) {
 
 void ctrls::checkTouchedFaderX(int _x) {
     for (int i = 0; i<amnt; i++) {
-        if (i*spacer - _x < spacer) touchedFader = i;
+        if ((i+1)*spacer - _x < spacer) touchedFader = i;
     }
 }
 

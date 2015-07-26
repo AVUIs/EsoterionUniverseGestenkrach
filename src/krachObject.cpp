@@ -17,7 +17,8 @@ krachObject::~krachObject() {
 }
 
 void krachObject::setup() {
-    krach = new ofxSCSynth("krach1");
+    synthName = "krach1";
+    krach = new ofxSCSynth(synthName);
     krach->create();
 }
 
@@ -40,10 +41,14 @@ void krachObject::setParam(int _param, float _val) {
                     break;
                 }
             }
-            cout << "selectedSynth " << selectedSynth << endl;
-            krach->free();
-            krach = new ofxSCSynth(selectedSynth);
-            krach->create();
+            if (selectedSynth != synthName) {
+                synthName = selectedSynth;
+                krach->free();
+                krach = NULL;
+                krach = new ofxSCSynth(selectedSynth);
+                cout << "CREATED SYNTH " << selectedSynth << endl;
+                krach->create();
+            }
             break;
         }
         case 2:
@@ -61,6 +66,15 @@ void krachObject::setParam(int _param, float _val) {
         break;
     }
 }
+
+void krachObject::setPan(float _val) {
+    krach->set("pan", _val);
+}
+
+void krachObject::setAmp(float _val) {
+//    krach->set("amp", _val);
+}
+
 
 float krachObject::getParam(int _param) {
 }

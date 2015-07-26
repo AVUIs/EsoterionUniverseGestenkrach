@@ -378,6 +378,8 @@
 				EE264D451A34B37200ADE8AC /* ctrls.h */,
 				EE264D031A348DBC00ADE8AC /* ecuaObject.cpp */,
 				EE264D041A348DBC00ADE8AC /* ecuaObject.h */,
+				3EB4792B1B63B8610033B038 /* krachObject.cpp */,
+				3EB4792C1B63B8610033B038 /* krachObject.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
@@ -386,8 +388,6 @@
 				EEF7DEFC1A3366ED00B9DE2B /* ECUBaseObject.h */,
 				EEF7DEFD1A33688100B9DE2B /* ECURabbitObject.h */,
 				EEF7DEFE1A33695100B9DE2B /* ECURabbitObject.cpp */,
-				3EB4792B1B63B8610033B038 /* krachObject.cpp */,
-				3EB4792C1B63B8610033B038 /* krachObject.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

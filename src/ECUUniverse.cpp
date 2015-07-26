@@ -51,10 +51,9 @@ void ECUUniverse::draw() {
     cam.setPosition(pos);
 
     
-    ofSetColor(255);
+    ofSetColor(255,255,255,255);
     cam.begin();
     
-
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         ofVec3f screenPos = cam.worldToScreen((*it)->pos);
         ofPoint screenPos2 = ofPoint(screenPos.x, screenPos.y); //in 2D
@@ -64,7 +63,6 @@ void ECUUniverse::draw() {
             (*it)->draw();    //KX draw only visible objects
         }
     }
-    
 
     cam.end();
 
@@ -76,8 +74,10 @@ void ECUUniverse::draw() {
             ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
         }
     }
-    ofSetColor(128);
-    ofDrawBitmapString("NUM OBJECTS: " + ofToString(objects.size()),ofGetWidth()/2-50,ofGetHeight());
+//    ofSetColor(0,0,0,255);
+//    ofDrawBitmapString("NUM OBJECTS: " + ofToString(objects.size()),ofGetWidth()/2-50,ofGetHeight());
+//    ofSetColor(255,255,255,255);
+    ofDrawBitmapString("NUM OBJECTS: " + ofToString(objects.size()),ofGetWidth()/2-49,ofGetHeight());
 }
 
 void ECUUniverse::save() {
@@ -138,7 +138,7 @@ int ECUUniverse::addObject(ECUBaseObject *object) {
 }
 
 
-#define DIST_TO_SELECT 40
+#define DIST_TO_SELECT 100
 
 ECUBaseObject* ECUUniverse::findEditObject(float x, float y) {
     

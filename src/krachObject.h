@@ -22,8 +22,12 @@ public:
     
     void setParam(int _param, float _val);
     float getParam(int _param);
-    
+    void setPan(float _val);
+    void setAmp(float _val);
+
     ofxSCSynth  *krach;
+    
+    string  synthName;
 };
 
 
